@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TipCalculator"
+             x:Class="TipCalculator.MainPage"
+             >
+
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ImageButton Grid.Row="0" HorizontalOptions="End" Source="settings.png" Margin="12"/>
+        <StackLayout Grid.Row="1" Margin="12">
+            <Label Text="Bill Total" FontSize="Caption"/>
+            <Label x:Name="BillTotalLabel" Text="$0.00" FontSize="32" Margin="0,12,0,0"/>
+        </StackLayout>
+        <StackLayout Grid.Row="2" Margin="12">
+            <Label Text="Tip Percentage" FontSize="Caption"/>
+            <Picker x:Name="TipPercentPicker"  FontSize="32" Margin="0,12,0,0" SelectedIndex="0"  HorizontalOptions="Start">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>10%</x:String>
+                        <x:String>15%</x:String>
+                        <x:String>20%</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+        </StackLayout>
+        <Frame Grid.Row="3" BackgroundColor="#eeeff8" CornerRadius="20" Margin="12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Column="0">
+                    <Label Text="Split" FontAttributes="Bold"/>
+                    <StackLayout Orientation="Horizontal" Margin="0,12,0,0">
+                        <Button x:Name="btnDecrease" Clicked="btnDecrease_Clicked" BackgroundColor="#e0e0f4" HeightRequest="35" CornerRadius="18" Text="-" FontSize="20" Padding="0,0,0,2" WidthRequest="35" TextColor="Black" Margin="0,0,14,0" />
+                        <Label Text="{Binding SplitAmount}" FontSize="28" />
+                        <Button x:Name="btnIncrease" Clicked="btnIncrease_Clicked" BackgroundColor="#e0e0f4" HeightRequest="35" CornerRadius="18" Text="+" FontSize="20" Padding="0,0,0,2" WidthRequest="35"  TextColor="Black" Margin="14,0,0,0"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Grid.Column="1" HorizontalOptions="End" Margin="0,0,12,0">
+                    <Label Text="Split Total" FontAttributes="Bold"/>
+                    <Label Text="{Binding SplitTotalLabel}" FontSize="32" Margin="0,12,0,0"/>
+                </StackLayout>
+            </Grid>
+        </Frame>
+        <Grid Grid.Row="4" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border x:Name="OneButton" Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Border.GestureRecognizers>
+                <Label Text="1" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Border>
+            <Border x:Name="TwoButton" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Border.GestureRecognizers>
+                <Label Text="2" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Border>
+            <Border x:Name="ThreeButton" Grid.Row="0" Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Border.GestureRecognizers>
+                <Label Text="3" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Border>
+            <Border x:Name="FourButton" Grid.Row="1" Grid.Column="0">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Border.GestureRecognizers>
+                <Label Text="4" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Border>
+            <Border x:Name="FiveButton" Grid.Row="1" Grid.Column="1">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Border.GestureRecognizers>
+                <Label Text="5" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Border>
+            <Border x:Name="SixButton" Grid.Row="1" Grid.Column="2">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Border.GestureRecognizers>
+                <Label Text="6" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Border>
+            <Border x:Name="SevenButton" Grid.Row="2" Grid.Column="0">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Border.GestureRecognizers>
+                <Label Text="7" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Border>
+            <Border x:Name="EightButton" Grid.Row="2" Grid.Column="1">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Border.GestureRecognizers>
+                <Label Text="8" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Border>
+            <Border x:Name="NineButton" Grid.Row="2" Grid.Column="2">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Border.GestureRecognizers>
+                <Label Text="9" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Border>
+            <Border x:Name="DotButton" Grid.Row="3" Grid.Column="0">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+                </Border.GestureRecognizers>
+                <Label Text="." FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Border>
+            <Border x:Name="ZeroButton" Grid.Row="3" Grid.Column="1">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                </Border.GestureRecognizers>
+                <Label Text="0" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Border>
+            <Border x:Name="DelButton" Grid.Row="3" Grid.Column="2">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_2"/>
+                </Border.GestureRecognizers>
+                <Label Text="DEL" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Border>
+        </Grid>
+    </Grid>
+
+</ContentPage>
