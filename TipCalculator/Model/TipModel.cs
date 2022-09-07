@@ -10,11 +10,12 @@ namespace TipCalculator.Model
     public class TipModel : INotifyPropertyChanged
     {
         private double _billTotal;
-        private int _tipPercent;
+        private double _tipPercent;
         private int _splitAmount;
         private double _splitTotal;
 
-        public double BillTotal {
+        public double BillTotal
+        {
             get
             {
                 return _billTotal;
@@ -34,7 +35,7 @@ namespace TipCalculator.Model
             }
         }
 
-        public int TipPercent
+        public double TipPercent
         {
             get
             {

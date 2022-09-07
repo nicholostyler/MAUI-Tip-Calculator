@@ -10,12 +10,27 @@ namespace TipCalculator.ViewModel
     public class TipViewModel
     {
         public TipModel tipModel = new TipModel();
+        public bool IsCents { get; set; }
+
         public TipViewModel()
         {
             tipModel.BillTotal = 0.00;
-            tipModel.TipPercent = 10;
+            tipModel.TipPercent = .10;
             tipModel.SplitAmount = 2;
             tipModel.SplitTotal = 0.00;
+            IsCents = false;
+        }
+
+        public void ChangeCents()
+        {
+            if (IsCents == false)
+            {
+                IsCents = true;
+            }
+            else
+            {
+                IsCents = false;
+            }
         }
 
         public void ChangeBillTotal(double newBillTotal)
@@ -23,6 +38,29 @@ namespace TipCalculator.ViewModel
             if (newBillTotal < 0) return;
             tipModel.BillTotal = newBillTotal;
             CalculateSplitTotal();
+        }
+
+        public void ChangeTipPercentage(string tipPercent)
+        {
+            switch (tipPercent)
+            {
+                case "10%":
+                    tipModel.TipPercent = .10;
+                    CalculateSplitTotal();
+                    break;
+                case "15%":
+                    tipModel.TipPercent = .15;
+                    CalculateSplitTotal();
+                    break;
+                case "20%":
+                    tipModel.TipPercent = .20;
+                    CalculateSplitTotal();
+                    break;
+                default:
+                    tipModel.TipPercent = .10;
+                    CalculateSplitTotal();
+                    break;
+            }
         }
 
         public void ChangeSplitAmount(int newSplitAmount)
@@ -33,22 +71,7 @@ namespace TipCalculator.ViewModel
 
         public void CalculateSplitTotal()
         {
-            var tipPercent = 0.0;
-            switch (tipModel.TipPercent)
-            {
-                case 10:
-                    tipPercent = 0.10;
-                    break;
-                case 15:
-                    tipPercent = 0.15;
-                    break;
-                case 20:
-                    tipPercent = 0.20;
-                    break;
-                default:
-                    break;
-            }
-            double billWithTip = tipModel.BillTotal + (tipModel.BillTotal * tipPercent);
+            double billWithTip = tipModel.BillTotal + (tipModel.BillTotal * tipModel.TipPercent);
             tipModel.SplitTotal = billWithTip / tipModel.SplitAmount;
         }
 
@@ -60,7 +83,7 @@ namespace TipCalculator.ViewModel
 
         public void DecrementSplitAmount()
         {
-            if (tipModel.SplitAmount <= 0) return;
+            if (tipModel.SplitAmount == 1) return;
             tipModel.SplitAmount--;
             CalculateSplitTotal();
         }
