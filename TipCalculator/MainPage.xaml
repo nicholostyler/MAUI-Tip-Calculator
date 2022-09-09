@@ -14,11 +14,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ImageButton Grid.Row="0" HorizontalOptions="End" Source="settings.png" Margin="12"/>
-        <StackLayout Grid.Row="1" Margin="12">
+        <StackLayout Grid.Row="1" Margin="24,12,12,12">
             <Label Text="Bill Total" FontSize="Caption" />
             <Label x:Name="BillTotalLabel" Text="$0.00" FontSize="32" FontAttributes="Bold" Margin="0,12,0,0"/>
         </StackLayout>
-        <StackLayout Grid.Row="2" Margin="12">
+        <StackLayout Grid.Row="2" Margin="24,12,12,12">
             <Label Text="Tip Percentage" FontSize="Caption"/>
             <Picker x:Name="TipPercentPicker" SelectedIndexChanged="TipPercentPicker_SelectedIndexChanged" FontAttributes="Bold" FontSize="32" Margin="0,12,0,0" SelectedIndex="0"  HorizontalOptions="Start">
                 <Picker.ItemsSource>
@@ -30,7 +30,7 @@
                 </Picker.ItemsSource>
             </Picker>
         </StackLayout>
-        <Frame Grid.Row="3" BackgroundColor="#eeeff8" CornerRadius="20" Margin="12">
+        <Frame Grid.Row="3" BackgroundColor="#eeeff8" BorderColor="Transparent" CornerRadius="20" Margin="12">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
