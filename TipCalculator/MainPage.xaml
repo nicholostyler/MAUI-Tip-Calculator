@@ -15,12 +15,12 @@
         </Grid.RowDefinitions>
         <ImageButton Grid.Row="0" HorizontalOptions="End" Source="settings.png" Margin="12"/>
         <StackLayout Grid.Row="1" Margin="12">
-            <Label Text="Bill Total" FontSize="Caption"/>
-            <Label x:Name="BillTotalLabel" Text="$0.00" FontSize="32" Margin="0,12,0,0"/>
+            <Label Text="Bill Total" FontSize="Caption" />
+            <Label x:Name="BillTotalLabel" Text="$0.00" FontSize="32" FontAttributes="Bold" Margin="0,12,0,0"/>
         </StackLayout>
         <StackLayout Grid.Row="2" Margin="12">
             <Label Text="Tip Percentage" FontSize="Caption"/>
-            <Picker x:Name="TipPercentPicker" SelectedIndexChanged="TipPercentPicker_SelectedIndexChanged"  FontSize="32" Margin="0,12,0,0" SelectedIndex="0"  HorizontalOptions="Start">
+            <Picker x:Name="TipPercentPicker" SelectedIndexChanged="TipPercentPicker_SelectedIndexChanged" FontAttributes="Bold" FontSize="32" Margin="0,12,0,0" SelectedIndex="0"  HorizontalOptions="Start">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>10%</x:String>
@@ -37,16 +37,16 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <StackLayout Grid.Column="0">
-                    <Label Text="Split" FontAttributes="Bold"/>
-                    <StackLayout Orientation="Horizontal" Margin="0,12,0,0">
+                    <Label Text="Split" FontAttributes="Bold" TextColor="#5140d3"/>
+                    <StackLayout Orientation="Horizontal" Margin="0,24,0,0">
                         <Button x:Name="btnDecrease" Clicked="btnDecrease_Clicked" BackgroundColor="#e0e0f4" HeightRequest="35" CornerRadius="18" Text="-" FontSize="20" Padding="0,0,0,2" WidthRequest="35" TextColor="Black" Margin="0,0,14,0" />
-                        <Label Text="{Binding SplitAmount}" FontSize="28" />
+                        <Label Text="{Binding SplitAmount}" FontSize="28" TextColor="#5140d3" FontAttributes="Bold" />
                         <Button x:Name="btnIncrease" Clicked="btnIncrease_Clicked" BackgroundColor="#e0e0f4" HeightRequest="35" CornerRadius="18" Text="+" FontSize="20" Padding="0,0,0,2" WidthRequest="35"  TextColor="Black" Margin="14,0,0,0"/>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Grid.Column="1" HorizontalOptions="End" Margin="0,0,12,0">
-                    <Label Text="Split Total" FontAttributes="Bold"/>
-                    <Label Text="{Binding SplitTotalLabel}" FontSize="32" Margin="0,12,0,0"/>
+                    <Label Text="Split Total" FontAttributes="Bold" TextColor="#5140d3"/>
+                    <Label Text="{Binding SplitTotalLabel}" FontAttributes="Bold" FontSize="32" Margin="0,20,0,0" TextColor="#5140d3"/>
                 </StackLayout>
             </Grid>
         </Frame>
@@ -62,19 +62,19 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Border x:Name="OneButton" Grid.Row="0" Grid.Column="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+            <Border x:Name="OneButton" Grid.Row="0" Grid.Column="0" StrokeThickness="1"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="Number_Tapped"/>
                 </Border.GestureRecognizers>
                 <Label Text="1" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             </Border>
-            <Border x:Name="TwoButton" Grid.Row="0" Grid.Column="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Border x:Name="TwoButton" Grid.Row="0" Grid.Column="1" StrokeThickness="1"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="Number_Tapped"/>
                 </Border.GestureRecognizers>
                 <Label Text="2" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             </Border>
-            <Border x:Name="ThreeButton" Grid.Row="0" Grid.Column="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Border x:Name="ThreeButton" Grid.Row="0" Grid.Column="2" Margin="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="Number_Tapped"/>
                 </Border.GestureRecognizers>
@@ -132,7 +132,7 @@
                 <Border.GestureRecognizers>
                     <TapGestureRecognizer Tapped="DeleteButton_Tapped"/>
                 </Border.GestureRecognizers>
-                <Label Text="DEL" FontSize="Large" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                <Image Source="backspace.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             </Border>
         </Grid>
     </Grid>
