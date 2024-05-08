@@ -31,19 +31,27 @@
             </Grid.ColumnDefinitions>
             <StackLayout Grid.Column="0">
                 <Label Text="Bill Total" FontSize="Caption" />
-                <Label x:Name="BillTotalLabel" Text="$0.00" FontSize="32" FontAttributes="Bold" Margin="0,12,0,0"/>
+                <Label x:Name="BillTotalLabel" Text="{Binding BillTotal, StringFormat='{}{0:#,$0.00}'}" FontSize="32" FontAttributes="Bold" Margin="0,12,0,0"/>
             </StackLayout>
         </Grid>
         
         <StackLayout Grid.Row="2" Margin="12,0,12,0">
             <Label Text="Tip " FontSize="Caption"/>
-            <Frame BackgroundColor="LightGray" BorderColor="Transparent" CornerRadius="12" Margin="0,12,0,0" HeightRequest="60" HorizontalOptions="FillAndExpand">
+            <Border BackgroundColor="LightGray" Margin="0,12,0,0" HeightRequest="60" HorizontalOptions="FillAndExpand">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="12"/>
+                </Border.StrokeShape>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Text="{Binding TipPercent, StringFormat='{}{0}%'}"/>
+                    <Border HorizontalOptions="Start" Stroke="#eeeff8" Background="#eeeff8" VerticalOptions="Center" StrokeThickness="2" WidthRequest="50" HeightRequest="30" Margin="12,0,0,0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12"/>
+                        </Border.StrokeShape>
+                        <Label Text="{Binding TipPercent, StringFormat='{}{0}%'}" FontSize="15" Padding="5" />
+                    </Border>
                     <Picker x:Name="TipPercentPicker" Grid.Column="0" SelectedIndexChanged="TipPercentPicker_SelectedIndexChanged" FontAttributes="Bold" SelectedIndex="0" Opacity="0">
                         <Picker.ItemsSource>
                             <x:Array Type="{x:Type x:String}">
@@ -53,18 +61,9 @@
                             </x:Array>
                         </Picker.ItemsSource>
                     </Picker>
-                    <Label Grid.Column="1" Text="$ 20" HorizontalOptions="EndAndExpand"/>
+                    <Label Grid.Column="1" Margin="0,0,12,0" Text="{Binding TipAmount, StringFormat='{}{0:#,$0.00}'}" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
                 </Grid>
-            </Frame>
-            <!--<Picker x:Name="TipPercentPicker" SelectedIndexChanged="TipPercentPicker_SelectedIndexChanged" HorizontalOptions="Start"  FontAttributes="Bold" FontSize="32" Margin="0,12,0,0" SelectedIndex="0" >
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>10%</x:String>
-                        <x:String>15%</x:String>
-                        <x:String>20%</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>-->
+            </Border>
         </StackLayout>
         <Frame Grid.Row="3" BackgroundColor="#eeeff8" BorderColor="Transparent" CornerRadius="20" Margin="12">
             <Grid>
@@ -75,14 +74,16 @@
                 <StackLayout Grid.Column="0">
                     <Label Text="Split" FontAttributes="Bold" TextColor="#5140d3"/>
                     <StackLayout Orientation="Horizontal" Margin="0,24,0,0">
+                        
                         <Button x:Name="btnDecrease" Clicked="btnDecrease_Clicked" BackgroundColor="#e0e0f4" HeightRequest="35" CornerRadius="18" Text="-" FontSize="20" Padding="0,0,0,2" WidthRequest="35" TextColor="Black" Margin="0,0,14,0" />
                         <Label Text="{Binding SplitAmount}" FontSize="28" TextColor="#5140d3" FontAttributes="Bold" />
                         <Button x:Name="btnIncrease" Clicked="btnIncrease_Clicked" BackgroundColor="#e0e0f4" HeightRequest="35" CornerRadius="18" Text="+" FontSize="20" Padding="0,0,0,2" WidthRequest="35"  TextColor="Black" Margin="14,0,0,0"/>
+                    
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Grid.Column="1" HorizontalOptions="End" Margin="0,0,12,0">
                     <Label Text="Per Person" FontAttributes="Bold" TextColor="#5140d3"/>
-                    <Label Text="{Binding SplitTotalLabel}" FontAttributes="Bold" FontSize="32" Margin="0,20,0,0" TextColor="#5140d3"/>
+                    <Label Text="{Binding SplitTotal, StringFormat='{}{0:#,$0.00}'}" FontAttributes="Bold" FontSize="32" Margin="0,20,0,0" TextColor="#5140d3"/>
                 </StackLayout>
             </Grid>
         </Frame>

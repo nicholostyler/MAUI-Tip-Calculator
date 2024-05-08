@@ -71,7 +71,8 @@ namespace TipCalculator.ViewModel
 
         public void CalculateSplitTotal()
         {
-            double billWithTip = tipModel.BillTotal + (tipModel.BillTotal * (tipModel.TipPercent / 100));
+            tipModel.TipAmount = (tipModel.BillTotal * (tipModel.TipPercent / 100));
+            double billWithTip = tipModel.BillTotal + tipModel.TipAmount;
             tipModel.SplitTotal = billWithTip / tipModel.SplitAmount;
         }
 

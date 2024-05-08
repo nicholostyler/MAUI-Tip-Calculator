@@ -95,7 +95,7 @@ public partial class MainPage : ContentPage
 
     private void SetLabelUpdateTotal()
     {
-        BillTotalLabel.Text = BillPrincipal;
+        //BillTotalLabel.Text = BillPrincipal;
         double totalDouble = Double.Parse(BillPrincipal);
         viewModel.ChangeBillTotal(totalDouble);
     }

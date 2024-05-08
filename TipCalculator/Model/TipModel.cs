@@ -13,6 +13,7 @@ namespace TipCalculator.Model
         private double _tipPercent;
         private int _splitAmount;
         private double _splitTotal;
+        private double _tipAmount;
 
         public double BillTotal
         {
@@ -23,7 +24,7 @@ namespace TipCalculator.Model
             set
             {
                 _billTotal = value;
-                OnPropertyChanged(nameof(BillTotalLabel));
+                OnPropertyChanged(nameof(BillTotal));
             }
         }
 
@@ -44,7 +45,7 @@ namespace TipCalculator.Model
             set
             {
                 _tipPercent = value;
-                OnPropertyChanged(nameof(TipPercentLabel));
+                OnPropertyChanged(nameof(TipPercent));
             }
         }
 
@@ -70,6 +71,19 @@ namespace TipCalculator.Model
             }
         }
 
+        public double TipAmount
+        {
+            get
+            {
+                return _tipAmount;
+            }
+            set
+            {
+                _tipAmount = value;
+                OnPropertyChanged("TipAmount");
+            }
+        }
+
         public double SplitTotal
         {
             get
@@ -79,7 +93,7 @@ namespace TipCalculator.Model
             set
             {
                 _splitTotal = value;
-                OnPropertyChanged(nameof(SplitTotalLabel));
+                OnPropertyChanged(nameof(SplitTotal));
             }
         }
 
