@@ -1,4 +1,8 @@
-﻿namespace TipCalculator;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Maui.LifecycleEvents;
+using The49.Maui.Insets;
+
+namespace TipCalculator;
 
 public static class MauiProgram
 {
@@ -7,12 +11,9 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
-			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+			.UseMauiCommunityToolkit()
+			.UseInsets();
 
-		return builder.Build();
+        return builder.Build();
 	}
 }

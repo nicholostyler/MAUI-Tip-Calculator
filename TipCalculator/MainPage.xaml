@@ -2,10 +2,20 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:TipCalculator"
+             xmlns:droid="clr-namespace:CommunityToolkit.Maui.PlatformConfiguration.AndroidSpecific;assembly=CommunityToolkit.Maui"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:insets="https://schemas.the49.com/dotnet/2023/maui"
+             insets:Insets.EdgeToEdge="True"
+             insets:Insets.StatusBarStyle="DarkContent"
              x:Class="TipCalculator.MainPage"
              >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:DoubleToIntConverter x:Key="DoubleToIntConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-    <Grid x:Name="MainGrid">
+    <Grid x:Name="MainGrid" Padding="{Binding InsetsThickness, Source={x:Static insets:Insets.Current}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="100"/>
@@ -14,13 +24,39 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <ImageButton Grid.Row="0" HorizontalOptions="End" Source="settings.png" Margin="12"/>
-        <StackLayout Grid.Row="1" Margin="24,12,12,12">
-            <Label Text="Bill Total" FontSize="Caption" />
-            <Label x:Name="BillTotalLabel" Text="$0.00" FontSize="32" FontAttributes="Bold" Margin="0,12,0,0"/>
-        </StackLayout>
-        <StackLayout Grid.Row="2" Margin="24,12,12,12">
-            <Label Text="Tip Percentage" FontSize="Caption"/>
-            <Picker x:Name="TipPercentPicker" SelectedIndexChanged="TipPercentPicker_SelectedIndexChanged" FontAttributes="Bold" FontSize="32" Margin="0,12,0,0" SelectedIndex="0"  HorizontalOptions="Start">
+        <Grid Grid.Row="1" Margin="12,12,12,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Column="0">
+                <Label Text="Bill Total" FontSize="Caption" />
+                <Label x:Name="BillTotalLabel" Text="$0.00" FontSize="32" FontAttributes="Bold" Margin="0,12,0,0"/>
+            </StackLayout>
+        </Grid>
+        
+        <StackLayout Grid.Row="2" Margin="12,0,12,0">
+            <Label Text="Tip " FontSize="Caption"/>
+            <Frame BackgroundColor="LightGray" BorderColor="Transparent" CornerRadius="12" Margin="0,12,0,0" HeightRequest="60" HorizontalOptions="FillAndExpand">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Text="{Binding TipPercent, StringFormat='{}{0}%'}"/>
+                    <Picker x:Name="TipPercentPicker" Grid.Column="0" SelectedIndexChanged="TipPercentPicker_SelectedIndexChanged" FontAttributes="Bold" SelectedIndex="0" Opacity="0">
+                        <Picker.ItemsSource>
+                            <x:Array Type="{x:Type x:String}">
+                                <x:String>10%</x:String>
+                                <x:String>15%</x:String>
+                                <x:String>20%</x:String>
+                            </x:Array>
+                        </Picker.ItemsSource>
+                    </Picker>
+                    <Label Grid.Column="1" Text="$ 20" HorizontalOptions="EndAndExpand"/>
+                </Grid>
+            </Frame>
+            <!--<Picker x:Name="TipPercentPicker" SelectedIndexChanged="TipPercentPicker_SelectedIndexChanged" HorizontalOptions="Start"  FontAttributes="Bold" FontSize="32" Margin="0,12,0,0" SelectedIndex="0" >
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>10%</x:String>
@@ -28,7 +64,7 @@
                         <x:String>20%</x:String>
                     </x:Array>
                 </Picker.ItemsSource>
-            </Picker>
+            </Picker>-->
         </StackLayout>
         <Frame Grid.Row="3" BackgroundColor="#eeeff8" BorderColor="Transparent" CornerRadius="20" Margin="12">
             <Grid>
@@ -45,7 +81,7 @@
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Grid.Column="1" HorizontalOptions="End" Margin="0,0,12,0">
-                    <Label Text="Split Total" FontAttributes="Bold" TextColor="#5140d3"/>
+                    <Label Text="Per Person" FontAttributes="Bold" TextColor="#5140d3"/>
                     <Label Text="{Binding SplitTotalLabel}" FontAttributes="Bold" FontSize="32" Margin="0,20,0,0" TextColor="#5140d3"/>
                 </StackLayout>
             </Grid>
