@@ -1,7 +1,4 @@
-﻿using Microsoft.Maui.Controls;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using TipCalculator.ViewModel;
+﻿using TipCalculator.ViewModel;
 
 namespace TipCalculator;
 
@@ -14,7 +11,7 @@ public partial class MainPage : ContentPage
     {
         viewModel = new TipViewModel();
         InitializeComponent();
-        MainGrid.BindingContext = viewModel.tipModel;
+        MainGrid.BindingContext = viewModel;
         TipPercentPicker.SelectedIndex = 0;
     }
 
@@ -31,15 +28,26 @@ public partial class MainPage : ContentPage
         if (viewModel.IsCents == true)
         {
             // if the string contains the dot 
-            int index = BillPrincipal.IndexOf('.');
-            if (index > 0)
+            if (BillPrincipal.Contains("."))
             {
-                // remove the dot and add it again with the number
-                BillPrincipal = BillPrincipal.Substring(0, index);
-                BillPrincipal += "." + number;
-                viewModel.IsCents = false;
-            }
+                // Split the Principal
+                string[] principalSplit = BillPrincipal.Split('.');
 
+                // if value after dot is two 00 then it is default
+                if (principalSplit[1] == "00")
+                {
+                    BillPrincipal = principalSplit[0] + "." + number;
+                }
+                else if (principalSplit[1].Count() == 2) 
+                {
+                    return;
+                }
+                else
+                {
+                    BillPrincipal += number;
+                }
+                
+            }
         }
         else
         {
@@ -60,23 +68,28 @@ public partial class MainPage : ContentPage
         // Change the view to let viewmodel know its on the cents portion
         viewModel.ChangeCents();
         // add to main string 
-        BillPrincipal += ".";
-        BillTotalLabel.Text = BillPrincipal;
+        BillPrincipal += ".00";
+        //BillTotalLabel.Text = BillPrincipal;
+        SetLabelUpdateTotal();
     }
 
     private void DeleteButton_Tapped(object sender, EventArgs e)
     {
-        // delete button
-        //if (BillPrincipal.Length > 0)
-        // remove the next item in string
+        if (BillPrincipal == "$0.00")
+        {
+            return;
+        }
+        
         BillPrincipal = BillPrincipal.Remove(BillPrincipal.Length - 1, 1);
 
         // if string is empty
-        if (BillPrincipal.Length <= 0)
+        if (BillPrincipal.Length == 0)
         {
             ResetLabels();
             return;
         }
+        
+        
 
         SetLabelUpdateTotal();
 
@@ -84,13 +97,15 @@ public partial class MainPage : ContentPage
         if (BillPrincipal[BillPrincipal.Length - 1] == '.')
         {
             BillPrincipal = BillPrincipal.Remove(BillPrincipal.Length - 1, 1);
+            viewModel.ChangeCents();
         }
 
     }
 
     private void ResetLabels()
     {
-        BillTotalLabel.Text = "0.00";
+        BillPrincipal = "0.00";
+        SetLabelUpdateTotal();
     }
 
     private void SetLabelUpdateTotal()
@@ -104,7 +119,7 @@ public partial class MainPage : ContentPage
     {
         viewModel.DecrementSplitAmount();
         // if the split amount is 1 disable the button
-        if (viewModel.tipModel.SplitAmount == 1)
+        if (viewModel.SplitAmount == 1)
         {
             btnDecrease.IsEnabled = false;
         }
@@ -112,7 +127,7 @@ public partial class MainPage : ContentPage
 
     private void btnIncrease_Clicked(object sender, EventArgs e)
     {
-        if (viewModel.tipModel.SplitAmount == 1)
+        if (viewModel.SplitAmount == 1)
         {
             btnDecrease.IsEnabled = true;
         }

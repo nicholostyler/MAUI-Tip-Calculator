@@ -1,15 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using CommunityToolkit.Mvvm;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace TipCalculator.Model
 {
-    public class TipModel : INotifyPropertyChanged
+    public partial class TipModel
     {
-        private double _billTotal;
+        public double BillTotal;
+        public double TipPercent;
+        public double SplitAmount;
+        public double SplitTotal;
+        public double TipAmount;
+
+        //[ObservableProperty]
+        //double billTotal;
+        //[ObservableProperty]
+        //double tipPercent;
+        //[ObservableProperty]
+        //int splitAmount;
+        //[ObservableProperty]
+        //double splitTotal;
+        //[ObservableProperty]
+        //double tipAmount;
+
+        /*private double _billTotal;
         private double _tipPercent;
         private int _splitAmount;
         private double _splitTotal;
@@ -28,14 +42,6 @@ namespace TipCalculator.Model
             }
         }
 
-        public string BillTotalLabel
-        {
-            get
-            {
-                return "$ " + _billTotal;
-            }
-        }
-
         public double TipPercent
         {
             get
@@ -48,15 +54,6 @@ namespace TipCalculator.Model
                 OnPropertyChanged(nameof(TipPercent));
             }
         }
-
-        public string TipPercentLabel
-        {
-            get
-            {
-                return _tipPercent + "%";
-            }
-        }
-
 
         public int SplitAmount
         {
@@ -97,14 +94,6 @@ namespace TipCalculator.Model
             }
         }
 
-        public string SplitTotalLabel
-        {
-            get
-            {
-                return String.Format("{0:0.00}", _splitTotal);
-            }
-        }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
@@ -112,6 +101,6 @@ namespace TipCalculator.Model
             var handler = PropertyChanged;
             if (handler != null)
                 handler(this, new PropertyChangedEventArgs(propertyName));
-        }
+        }*/
     }
 }

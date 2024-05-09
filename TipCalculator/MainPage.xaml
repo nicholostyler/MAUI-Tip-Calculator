@@ -31,7 +31,7 @@
             </Grid.ColumnDefinitions>
             <StackLayout Grid.Column="0">
                 <Label Text="Bill Total" FontSize="Caption" />
-                <Label x:Name="BillTotalLabel" Text="{Binding BillTotal, StringFormat='{}{0:#,$0.00}'}" FontSize="32" FontAttributes="Bold" Margin="0,12,0,0"/>
+                <Label x:Name="BillTotalLabel" Text="{Binding BillTotal, StringFormat='{}{0:c}'}" FontSize="32" FontAttributes="Bold" Margin="0,12,0,0"/>
             </StackLayout>
         </Grid>
         
@@ -50,7 +50,7 @@
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="12"/>
                         </Border.StrokeShape>
-                        <Label Text="{Binding TipPercent, StringFormat='{}{0}%'}" FontSize="15" Padding="5" />
+                        <Label Text="{Binding TipPercent, StringFormat='{}{0}%'}" FontSize="15" Padding="5" HorizontalOptions="Center" VerticalOptions="Center" />
                     </Border>
                     <Picker x:Name="TipPercentPicker" Grid.Column="0" SelectedIndexChanged="TipPercentPicker_SelectedIndexChanged" FontAttributes="Bold" SelectedIndex="0" Opacity="0">
                         <Picker.ItemsSource>
