@@ -1,4 +1,5 @@
-﻿namespace TipCalculator;
+﻿using TipCalculator.Views;
+namespace TipCalculator;
 
 public partial class App : Application
 {

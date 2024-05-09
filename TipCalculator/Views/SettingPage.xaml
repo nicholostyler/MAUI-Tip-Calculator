@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TipCalculator.Views.SettingPage"
+             Title="SettingPage">
+    <VerticalStackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label  Text="Dark Mode" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <Switch Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

@@ -28,15 +28,15 @@ public partial class MainPage : ContentPage
         if (viewModel.IsCents == true)
         {
             // if the string contains the dot 
-            if (BillPrincipal.Contains("."))
+            if (viewModel.BillPrincipal.Contains("."))
             {
                 // Split the Principal
-                string[] principalSplit = BillPrincipal.Split('.');
+                string[] principalSplit = viewModel.BillPrincipal.Split('.');
 
                 // if value after dot is two 00 then it is default
                 if (principalSplit[1] == "00")
                 {
-                    BillPrincipal = principalSplit[0] + "." + number;
+                    viewModel.BillPrincipal = principalSplit[0] + "." + number;
                 }
                 else if (principalSplit[1].Count() == 2) 
                 {
@@ -44,14 +44,18 @@ public partial class MainPage : ContentPage
                 }
                 else
                 {
-                    BillPrincipal += number;
+                    viewModel.BillPrincipal += number;
                 }
                 
             }
         }
         else
         {
-            BillPrincipal += number;
+            if (viewModel.BillPrincipal == "0.00")
+            {
+                viewModel.BillPrincipal = string.Empty;
+            }
+            viewModel.BillPrincipal += number;
         }
 
         SetLabelUpdateTotal();
@@ -60,7 +64,7 @@ public partial class MainPage : ContentPage
     private void DotButton_Tapped(object sender, EventArgs e)
     {
         // Dot button pressed
-        if (BillPrincipal.Contains("."))
+        if (viewModel.BillPrincipal.Contains("."))
         {
             return;
         }
@@ -68,22 +72,22 @@ public partial class MainPage : ContentPage
         // Change the view to let viewmodel know its on the cents portion
         viewModel.ChangeCents();
         // add to main string 
-        BillPrincipal += ".00";
-        //BillTotalLabel.Text = BillPrincipal;
+        viewModel.BillPrincipal += ".00";
+        //BillTotalLabel.Text = viewModel.BillPrincipal;
         SetLabelUpdateTotal();
     }
 
     private void DeleteButton_Tapped(object sender, EventArgs e)
     {
-        if (BillPrincipal == "$0.00")
+        if (viewModel.BillPrincipal == "0.00")
         {
             return;
         }
         
-        BillPrincipal = BillPrincipal.Remove(BillPrincipal.Length - 1, 1);
+        viewModel.BillPrincipal = viewModel.BillPrincipal.Remove(viewModel.BillPrincipal.Length - 1, 1);
 
         // if string is empty
-        if (BillPrincipal.Length == 0)
+        if (viewModel.BillPrincipal.Length == 0)
         {
             ResetLabels();
             return;
@@ -94,9 +98,9 @@ public partial class MainPage : ContentPage
         SetLabelUpdateTotal();
 
         // if the next item in string is the dot.
-        if (BillPrincipal[BillPrincipal.Length - 1] == '.')
+        if (viewModel.BillPrincipal[viewModel.BillPrincipal.Length - 1] == '.')
         {
-            BillPrincipal = BillPrincipal.Remove(BillPrincipal.Length - 1, 1);
+            viewModel.BillPrincipal = viewModel.BillPrincipal.Remove(viewModel.BillPrincipal.Length - 1, 1);
             viewModel.ChangeCents();
         }
 
@@ -104,14 +108,15 @@ public partial class MainPage : ContentPage
 
     private void ResetLabels()
     {
-        BillPrincipal = "0.00";
+        viewModel.BillPrincipal = "0.00";
+        viewModel.IsCents = false;
         SetLabelUpdateTotal();
     }
 
     private void SetLabelUpdateTotal()
     {
-        //BillTotalLabel.Text = BillPrincipal;
-        double totalDouble = Double.Parse(BillPrincipal);
+        //BillTotalLabel.Text = viewModel.BillPrincipal;
+        double totalDouble = Double.Parse(viewModel.BillPrincipal);
         viewModel.ChangeBillTotal(totalDouble);
     }
 

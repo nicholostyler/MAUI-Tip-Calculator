@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,8 @@ namespace TipCalculator.ViewModel
         double splitTotal;
         [ObservableProperty]
         double tipAmount;
+        [ObservableProperty]
+        string billPrincipal;
 
         public TipViewModel()
         {
@@ -100,6 +103,12 @@ namespace TipCalculator.ViewModel
             if (SplitAmount == 1) return;
             SplitAmount--;
             CalculateSplitTotal();
+        }
+
+        [RelayCommand]
+        private void DeleteButtonClicked()
+        {
+
         }
     }
 }

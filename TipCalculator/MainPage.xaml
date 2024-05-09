@@ -14,6 +14,8 @@
             <toolkit:DoubleToIntConverter x:Key="DoubleToIntConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
+    
+   
 
     <Grid x:Name="MainGrid" Padding="{Binding InsetsThickness, Source={x:Static insets:Insets.Current}}">
         <Grid.RowDefinitions>
@@ -23,7 +25,7 @@
             <RowDefinition Height="150"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ImageButton Grid.Row="0" HorizontalOptions="End" Source="settings.png" Margin="12"/>
+        <ImageButton Grid.Row="0" HorizontalOptions="End" Source="sun.png" Margin="12" />
         <Grid Grid.Row="1" Margin="12,12,12,12">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -61,7 +63,7 @@
                             </x:Array>
                         </Picker.ItemsSource>
                     </Picker>
-                    <Label Grid.Column="1" Margin="0,0,12,0" Text="{Binding TipAmount, StringFormat='{}{0:#,$0.00}'}" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
+                    <Label Grid.Column="1" Margin="0,0,12,0" Text="{Binding TipAmount, StringFormat='{}{0:c}'}" VerticalOptions="Center" HorizontalOptions="EndAndExpand"/>
                 </Grid>
             </Border>
         </StackLayout>
@@ -83,7 +85,7 @@
                 </StackLayout>
                 <StackLayout Grid.Column="1" HorizontalOptions="End" Margin="0,0,12,0">
                     <Label Text="Per Person" FontAttributes="Bold" TextColor="#5140d3"/>
-                    <Label Text="{Binding SplitTotal, StringFormat='{}{0:#,$0.00}'}" FontAttributes="Bold" FontSize="32" Margin="0,20,0,0" TextColor="#5140d3"/>
+                    <Label Text="{Binding SplitTotal, StringFormat='{}{0:c}'}" FontAttributes="Bold" FontSize="32" Margin="0,20,0,0" TextColor="#5140d3"/>
                 </StackLayout>
             </Grid>
         </Frame>
